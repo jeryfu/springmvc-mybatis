@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="demo">
+
+	<sql id="demo_column_list">
+		id, `key`, `value`
+	</sql>
+	
+	<!-- 
+		com.roachf.mybatis.demo.Demo 可以在mybatis-config.xml中配置别名
+		resultType = com.roachf.mybatis.demo.Demo : 将列表封装成 List<Demo>
+		resultType = hashMap : 将列表封装成List<Map>
+	 -->
+	<select id="list" resultType="demo">
+		select <include refid="demo_column_list" /> from demo
+	</select>
+	
+	
+	<select id="info" parameterType="int" resultType="demo">
+		select <include refid="demo_column_list" /> from demo where id = #{id}
+	</select>
+	
+	<insert id="insert" parameterType="demo" useGeneratedKeys="true" keyProperty="id" >
+		insert into demo(`key`, `value`) value (#{key}, #{value})
+	</insert>
+	
+	<update id="update" parameterType="demo" keyProperty="id" useGeneratedKeys="true">
+		update demo set `key` = #{key}, `value` = #{value} where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="int" >
+		delete from demo where id = #{id}
+	</delete>
+</mapper>

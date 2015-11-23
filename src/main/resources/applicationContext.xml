@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+        
+        
+	<context:component-scan base-package="com.roachf.ssm" >
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	
+	<context:property-placeholder location="classpath:db.properties" />
+	
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${db.driver}" />
+		<property name="jdbcUrl" value="${db.url}" />
+		<property name="user" value="${db.user}" />
+		<property name="password" value="${db.password}" />
+		
+		<!-- 二级缓存的配置 -->
+	</bean>
+	
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+		<!-- 最好在classpath 后面加 * -->
+		<property name="mapperLocations" value="classpath*:com/roachf/ssm/module/*/mapper/*-mapper.xml" />
+	</bean>
+	
+	<!-- 事务配置 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true"/>
+			<tx:method name="query*" read-only="true"/>
+			<tx:method name="find*" read-only="true"/>
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<aop:pointcut expression="execution(* com.roachf.ssm.module..*Service*.*(..))" id="pointcut"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut"/>
+	</aop:config>
+	
+</beans>
