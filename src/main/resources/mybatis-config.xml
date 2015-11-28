@@ -2,9 +2,17 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-
+	
 	<typeAliases>
 		<typeAlias type="com.roachf.ssm.module.demo.model.entity.Demo" alias="demo"/>
 	</typeAliases>
+	
+	<plugins>
+		<plugin interceptor="com.roachf.ssm.utils.plugins.StatementHandlerInterceptor">
+			<property name="dialect" value="mysql"/>
+		</plugin>
+		<plugin interceptor="com.roachf.ssm.utils.plugins.ResultSetHandlerInterceptor"></plugin>
+	</plugins>
+	
 	
 </configuration>

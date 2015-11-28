@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import com.roachf.ssm.module.base.dao.BaseDao;
 import com.roachf.ssm.module.base.service.BaseService;
+import com.roachf.ssm.pojo.entity.Page;
 
 //@Service("baseService")  baseService baseDao 是不需要扫描注入的, 直接实例化它的子类. 否则会多实例化一次基类
 public class BaseServiceImpl<T, PK extends Serializable> implements BaseService<T, PK> {
@@ -27,6 +28,11 @@ public class BaseServiceImpl<T, PK extends Serializable> implements BaseService<
 	@Override
 	public List<T> getList() {
 		return baseDao.getList();
+	}
+	
+	@Override
+	public List<T> getListByPage(Page page) {
+		return baseDao.getListByPage(null, page);
 	}
 
 	@Override

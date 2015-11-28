@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.roachf.ssm.module.base.service.BaseService;
+import com.roachf.ssm.pojo.entity.Page;
 
 public class BaseController<T, PK extends Serializable> {
 	
@@ -26,7 +27,10 @@ public class BaseController<T, PK extends Serializable> {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public List<T> list(){
+	public List<T> list(Page page){
+		if(page.isPage()){
+			return this.baseService.getListByPage(page);
+		}
 		return this.baseService.getList();
 	}
 	

@@ -82,6 +82,14 @@
 		</dependency>
 		<!-- mybatis end -->
 		
+		<!-- commons start -->
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+		<!--  commons end -->
+		
 		<!-- c3p0 start -->
 		<dependency>
 			<groupId>c3p0</groupId>

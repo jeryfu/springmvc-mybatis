@@ -3,10 +3,15 @@ package com.roachf.ssm.module.base.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import com.roachf.ssm.pojo.entity.Page;
+
 public interface BaseDao<T, PK extends Serializable> {
 
 	/** 获取所有列表 */
 	List<T> getList();
+	
+	/** 获取分页列表 */
+	List<T> getListByPage(Object parameters, Page page);
 	
 	/** 获取详情 */
 	T getInfo(PK id);

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.log4j.Logger;
@@ -18,6 +19,7 @@ import com.roachf.ssm.module.base.dao.BaseDao;
 import com.roachf.ssm.pojo.annotation.Column;
 import com.roachf.ssm.pojo.annotation.Id;
 import com.roachf.ssm.pojo.annotation.Table;
+import com.roachf.ssm.pojo.entity.Page;
 
 //@Repository("baseDao")
 public class BaseDaoImpl<T, PK extends Serializable> implements BaseDao<T, PK> {
@@ -32,8 +34,10 @@ public class BaseDaoImpl<T, PK extends Serializable> implements BaseDao<T, PK> {
 
 	@SuppressWarnings("unchecked")
 	public BaseDaoImpl() {
-		this.classEntity = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-//		this.classEntity = GenericsUtils.getSuperClassGenricType(this.getClass(), 0);
+		this.classEntity = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass())
+				.getActualTypeArguments()[0];
+		// this.classEntity =
+		// GenericsUtils.getSuperClassGenricType(this.getClass(), 0);
 		this.namespace = this.classEntity.getSimpleName().toLowerCase();
 		logger.info("namespace==" + namespace);
 	}
@@ -50,6 +54,12 @@ public class BaseDaoImpl<T, PK extends Serializable> implements BaseDao<T, PK> {
 	@Override
 	public List<T> getList() {
 		return getSqlSession().selectList(this.namespace + ".list");
+	}
+
+	@Override
+	public List<T> getListByPage(Object parameters, Page page) {
+		return getSqlSession().selectList(this.namespace + ".list", parameters,
+				new RowBounds(page.getPageStart(), page.getPageSize()));
 	}
 
 	public List<T> getList(Object parameter) {
@@ -76,9 +86,7 @@ public class BaseDaoImpl<T, PK extends Serializable> implements BaseDao<T, PK> {
 		return getSqlSession().delete(this.namespace + ".delete", id) > 0;
 	}
 
-	
-	
-	/********************************** 就是这么华丽的分隔线  **********************************/
+	/********************************** 就是这么华丽的分隔线 **********************************/
 
 	@Override
 	public List<T> findList() {
