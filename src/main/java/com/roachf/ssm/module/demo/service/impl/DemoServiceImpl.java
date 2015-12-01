@@ -1,8 +1,12 @@
 package com.roachf.ssm.module.demo.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.roachf.ssm.module.base.service.impl.BaseServiceImpl;
@@ -29,5 +33,17 @@ public class DemoServiceImpl extends BaseServiceImpl<Demo, Integer> implements D
 
 	public DemoServiceImpl() {
 		logger.info("demo service init . . . ");
+	}
+
+	@Override
+	@Cacheable(value = "demolist", key = "'#demolist'")
+	public List<Demo> getList() {
+		return demoDao.getList();
+	}
+	
+	@Override
+	@CacheEvict(value = "demolist", key = "'#demolist'")
+	public boolean insert(Demo entity) {
+		return demoDao.insert(entity);
 	}
 }

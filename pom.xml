@@ -9,7 +9,7 @@
 	<url>http://maven.apache.org</url>
 	
 	<properties>
-		<spring-version>4.0.0.RELEASE</spring-version>
+		<spring-version>4.1.4.RELEASE</spring-version>
 		<jackson-version>2.6.2</jackson-version>
 	</properties>
 	
@@ -30,6 +30,11 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
+			<version>${spring-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
 			<version>${spring-version}</version>
 		</dependency>
 		<dependency>
@@ -88,6 +93,11 @@
 			<artifactId>commons-lang</artifactId>
 			<version>2.6</version>
 		</dependency>
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+		</dependency>
 		<!--  commons end -->
 		
 		<!-- c3p0 start -->
@@ -97,6 +107,22 @@
 			<version>0.9.1.2</version>
 		</dependency>
 		<!-- c3p0 end -->
+		
+		<!-- ehcache start -->
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+			<version>2.6.11</version>
+		</dependency>		
+		<!--  ehcache end -->
+		
+		<!-- quartz start -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+		<!--  quartz end -->
 
 		<!-- mysql start -->
 		<dependency>
