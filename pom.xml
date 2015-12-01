@@ -150,6 +150,14 @@
 		</dependency>
 		<!--  jackson end -->
 		
+		<!-- javaMail start -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+		<!--  javaMail end -->
+		
 		<dependency>
 			<groupId>aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
