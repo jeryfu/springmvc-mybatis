@@ -4,14 +4,14 @@
 <configuration>
 	
 	<typeAliases>
-		<typeAlias type="com.roachf.ssm.module.demo.model.entity.Demo" alias="demo"/>
+		<typeAlias type="com.roachf.survey.pojo.entity.Demo" alias="demo"/>
 	</typeAliases>
 	
 	<plugins>
-		<plugin interceptor="com.roachf.ssm.utils.plugins.StatementHandlerInterceptor">
+		<plugin interceptor="com.roachf.survey.utils.plugins.StatementHandlerInterceptor">
 			<property name="dialect" value="mysql"/>
 		</plugin>
-		<plugin interceptor="com.roachf.ssm.utils.plugins.ResultSetHandlerInterceptor"></plugin>
+		<plugin interceptor="com.roachf.survey.utils.plugins.ResultSetHandlerInterceptor"></plugin>
 	</plugins>
 	
 	
