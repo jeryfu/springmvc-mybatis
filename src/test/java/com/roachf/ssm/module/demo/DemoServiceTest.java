@@ -7,6 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.roachf.ssm.module.demo.model.entity.Demo;
 import com.roachf.ssm.module.demo.service.impl.DemoServiceImpl;
+import com.roachf.ssm.pojo.entity.Page;
 
 public class DemoServiceTest {
 
@@ -22,7 +23,7 @@ public class DemoServiceTest {
 
 	@Test
 	public void listTest() {
-		System.out.println(demoService.getList());
+		System.out.println(demoService.getListByPage(new Page<Demo>(), null));
 	}
 	
 	@Test

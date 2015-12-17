@@ -34,10 +34,8 @@ public class BaseDaoImpl<T, PK extends Serializable> implements BaseDao<T, PK> {
 
 	@SuppressWarnings("unchecked")
 	public BaseDaoImpl() {
-		this.classEntity = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass())
+		this.classEntity = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass())
 				.getActualTypeArguments()[0];
-		// this.classEntity =
-		// GenericsUtils.getSuperClassGenricType(this.getClass(), 0);
 		this.namespace = this.classEntity.getSimpleName().toLowerCase();
 		logger.info("namespace==" + namespace);
 	}
@@ -52,14 +50,17 @@ public class BaseDaoImpl<T, PK extends Serializable> implements BaseDao<T, PK> {
 	}
 
 	@Override
-	public List<T> getList() {
-		return getSqlSession().selectList(this.namespace + ".list");
-	}
-
-	@Override
-	public List<T> getListByPage(Object parameters, Page page) {
-		return getSqlSession().selectList(this.namespace + ".list", parameters,
+	public Page<T> getListByPage(Page<T> page, Object parameters) {
+		List<T> list = getSqlSession().selectList(this.namespace + ".list", parameters,
 				new RowBounds(page.getPageStart(), page.getPageSize()));
+		page.setList(list);
+		page.setTotalCount(count(parameters));
+		return page;
+	}
+	
+	@Override
+	public Long count(Object parameters) {
+		 return getSqlSession().selectOne(this.namespace + ".count", parameters);
 	}
 
 	public List<T> getList(Object parameter) {

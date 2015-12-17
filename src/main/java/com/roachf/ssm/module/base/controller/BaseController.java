@@ -1,7 +1,6 @@
 package com.roachf.ssm.module.base.controller;
 
 import java.io.Serializable;
-import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.roachf.ssm.module.base.service.BaseService;
-import com.roachf.ssm.pojo.entity.Page;
 
 public class BaseController<T, PK extends Serializable> {
 	
@@ -25,15 +23,12 @@ public class BaseController<T, PK extends Serializable> {
 		logger.info("set base service . . . ");
 		this.baseService = baseService;
 	}
-	
+	/*
 	@RequestMapping(method=RequestMethod.GET)
-	public List<T> list(Page page){
-		if(page.isPage()){
-			return this.baseService.getListByPage(page);
-		}
-		return this.baseService.getList();
+	public Page<T> list(Page<T> page, T entity){
+		return this.baseService.getList(page, entity);
 	}
-	
+	*/
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public T info(@PathVariable("id")PK id){
 		return this.baseService.getInfo(id);

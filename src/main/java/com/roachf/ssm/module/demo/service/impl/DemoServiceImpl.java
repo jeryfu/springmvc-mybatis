@@ -1,18 +1,15 @@
 package com.roachf.ssm.module.demo.service.impl;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.roachf.ssm.module.base.service.impl.BaseServiceImpl;
 import com.roachf.ssm.module.demo.dao.DemoDao;
 import com.roachf.ssm.module.demo.model.entity.Demo;
 import com.roachf.ssm.module.demo.service.DemoService;
+import com.roachf.ssm.pojo.entity.Page;
 
 @Service("demoService")
 public class DemoServiceImpl extends BaseServiceImpl<Demo, Integer> implements DemoService{
@@ -22,8 +19,7 @@ public class DemoServiceImpl extends BaseServiceImpl<Demo, Integer> implements D
 	private DemoDao demoDao;
 	
 	@Resource(name="demoDao")
-	public void setBaseDao(DemoDao demoDao) {
-		super.setBaseDao(demoDao);
+	public void setDemoDao(DemoDao demoDao) {
 		this.demoDao = demoDao;
 	}
 	
@@ -36,13 +32,12 @@ public class DemoServiceImpl extends BaseServiceImpl<Demo, Integer> implements D
 	}
 
 	@Override
-	@Cacheable(value = "demolist", key = "'#demolist'")
-	public List<Demo> getList() {
-		return demoDao.getList();
+	public Page<Demo> getListByPage(Page<Demo> page, Object parameters) {
+		return demoDao.getListByPage(page, parameters);
 	}
 	
 	@Override
-	@CacheEvict(value = "demolist", key = "'#demolist'")
+//	@CacheEvict(value = "demolist", key = "'#demolist'")
 	public boolean insert(Demo entity) {
 		return demoDao.insert(entity);
 	}

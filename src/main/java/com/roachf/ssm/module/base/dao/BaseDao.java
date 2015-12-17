@@ -7,11 +7,11 @@ import com.roachf.ssm.pojo.entity.Page;
 
 public interface BaseDao<T, PK extends Serializable> {
 
-	/** 获取所有列表 */
-	List<T> getList();
-	
 	/** 获取分页列表 */
-	List<T> getListByPage(Object parameters, Page page);
+	Page<T> getListByPage(Page<T> page, Object parameters);
+	
+	/** 获取总记录 */
+	Long count(Object parameters);
 	
 	/** 获取详情 */
 	T getInfo(PK id);

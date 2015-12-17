@@ -18,7 +18,7 @@
         <persistence strategy="localTempSwap"/>
     </defaultCache>
 
-    <!--  -->
+    <!-- 
     <cache name="demolist"
            maxEntriesLocalHeap="10000"
            maxEntriesLocalDisk="1000"
@@ -30,5 +30,5 @@
            transactionalMode="off">
         <persistence strategy="localTempSwap"/>
     </cache>
-   
+    -->
 </ehcache>

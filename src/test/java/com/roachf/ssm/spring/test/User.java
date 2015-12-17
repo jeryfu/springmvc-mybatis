@@ -2,7 +2,6 @@ package com.roachf.ssm.spring.test;
 
 import java.lang.reflect.Field;
 
-import javax.jws.soap.SOAPBinding.Use;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;

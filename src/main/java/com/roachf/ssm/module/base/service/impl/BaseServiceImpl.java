@@ -1,7 +1,6 @@
 package com.roachf.ssm.module.base.service.impl;
 
 import java.io.Serializable;
-import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -25,14 +24,10 @@ public class BaseServiceImpl<T, PK extends Serializable> implements BaseService<
 		this.baseDao = baseDao;
 	}
 
-	@Override
-	public List<T> getList() {
-		return baseDao.getList();
-	}
 	
 	@Override
-	public List<T> getListByPage(Page page) {
-		return baseDao.getListByPage(null, page);
+	public Page<T> getListByPage(Page<T> page, Object parameter) {
+		return baseDao.getListByPage(page, parameter);
 	}
 
 	@Override

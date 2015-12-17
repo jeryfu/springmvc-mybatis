@@ -7,13 +7,20 @@
 		id, `key`, `value`
 	</sql>
 	
+	<sql id="demo_list">
+		select <include refid="demo_column_list" /> from demo
+	</sql>
+		
 	<!-- 
 		com.roachf.mybatis.demo.Demo 可以在mybatis-config.xml中配置别名
 		resultType = com.roachf.mybatis.demo.Demo : 将列表封装成 List<Demo>
 		resultType = hashMap : 将列表封装成List<Map>
 	 -->
 	<select id="list" resultType="demo">
-		select <include refid="demo_column_list" /> from demo
+		<include refid="demo_list" />
+	</select>
+	<select id="count" resultType="long">
+		select count(1) total from (<include refid="demo_list"/>) as temp_count
 	</select>
 	
 	

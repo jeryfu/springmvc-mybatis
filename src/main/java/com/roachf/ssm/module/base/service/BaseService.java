@@ -1,16 +1,13 @@
 package com.roachf.ssm.module.base.service;
 
 import java.io.Serializable;
-import java.util.List;
 
 import com.roachf.ssm.pojo.entity.Page;
 
 public interface BaseService<T, PK extends Serializable> {
-	/** 获取所有列表 */
-	List<T> getList();
 	
-	/** 获取分页列表 */
-	List<T> getListByPage(Page page);
+	/** 获取所有列表 */
+	Page<T> getListByPage(Page<T> page, Object parameter);
 	
 	/** 获取详情 */
 	T getInfo(PK id);

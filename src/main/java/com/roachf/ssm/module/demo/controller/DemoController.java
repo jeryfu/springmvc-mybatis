@@ -1,7 +1,5 @@
 package com.roachf.ssm.module.demo.controller;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
@@ -31,8 +29,7 @@ public class DemoController extends BaseController<Demo, Integer>{
 	private DemoService demoService;
 	
 	@Resource(name="demoService")
-	public void setBaseService(DemoService demoService) {
-		super.setBaseService(demoService);
+	public void setDemoService(DemoService demoService) {
 		this.demoService = demoService;
 	}
 
@@ -45,8 +42,8 @@ public class DemoController extends BaseController<Demo, Integer>{
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Demo> list(Page page) {
-		return demoService.getList();
+	public Page<Demo> list(Page<Demo> page) {
+		return demoService.getListByPage(page, null);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)

@@ -1,20 +1,24 @@
 package com.roachf.ssm.pojo.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
-public class Page implements Serializable{
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+public class Page<T> implements Serializable{
 	
 	private static final long serialVersionUID = 8956860176967040588L;
 	
-	/** 是否分页【true:分页; false：不分页】, 默认分页 */
-	private boolean isPage;
 	/** 页码 */
 	private int pageNo;
 	/** 页大小 */
 	private int pageSize;
+	/** 总记录数 */
+	private long totalCount;
+	/** 分页数据列表 */
+	private List<T> list;
 	
 	public Page() {
-		this.isPage = true;
 		this.pageNo = 1;
 		this.pageSize = 10;
 	}
@@ -22,14 +26,6 @@ public class Page implements Serializable{
 	public Page(int pageNo, int pageSize){
 		this.pageNo = pageNo;
 		this.pageSize = pageSize;
-	}
-
-	public boolean isPage() {
-		return isPage;
-	}
-
-	public void setPage(boolean isPage) {
-		this.isPage = isPage;
 	}
 
 	public int getPageNo() {
@@ -48,10 +44,27 @@ public class Page implements Serializable{
 		this.pageSize = pageSize;
 	}
 	
+	@JsonIgnore
 	public int getPageStart(){
 		return (this.pageNo-1) * this.pageSize;
 	}
 	
+	public long getTotalCount() {
+		return totalCount;
+	}
+
+	public void setTotalCount(long totalCount) {
+		this.totalCount = totalCount;
+	}
+
+	public List<T> getList() {
+		return list;
+	}
+
+	public void setList(List<T> list) {
+		this.list = list;
+	}
+
 	@Override
 	public String toString() {
 		return org.apache.commons.lang.builder.ReflectionToStringBuilder.toString(this);
