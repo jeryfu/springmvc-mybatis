@@ -6,6 +6,6 @@ import com.roachf.survey.dao.DemoDao;
 import com.roachf.survey.pojo.entity.Demo;
 
 @Repository("demoDao")
-public class DemoDaoImpl extends BaseDaoImpl<Demo, Long> implements DemoDao{
+public class DemoDaoImpl extends BaseDaoImpl<Demo, Integer> implements DemoDao{
 
 }

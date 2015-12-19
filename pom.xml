@@ -190,6 +190,19 @@
 			<version>1.7.12</version>
 		</dependency>
 		<!-- slf4j end -->
+		
+		<!-- jstl start -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		<!-- jstl end -->
 	</dependencies>
 	
 	<build>

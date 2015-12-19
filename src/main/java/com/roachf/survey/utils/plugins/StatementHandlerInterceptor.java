@@ -38,7 +38,6 @@ public class StatementHandlerInterceptor implements Interceptor{
 		}else if("oracle".equals(this.dialect)){
 			sql = getOraclePageSQL(sql, rowBounds);
 		}
-		System.out.println("sql==" + sql);
 		
 		ReflectUtils.setFieldValue(boundSql, "sql", sql);
 		return invocation.proceed();

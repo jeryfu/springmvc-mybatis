@@ -28,7 +28,7 @@ public class DemoServiceTest {
 	
 	@Test
 	public void infoTest() {
-		System.out.println(demoService.getInfo(1L));
+		System.out.println(demoService.getInfo(1));
 	}
 	
 	@Test
@@ -40,7 +40,7 @@ public class DemoServiceTest {
 	
 	@Test
 	public void deleteTest() {
-		System.out.println(demoService.delete(6L));
+		System.out.println(demoService.delete(6));
 	}
 	
 	@Test

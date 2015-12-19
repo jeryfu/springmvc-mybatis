@@ -1,4 +1,4 @@
-package com.roachf.survey.pojo.entity;
+package com.roachf.survey.utils.page;
 
 import java.io.Serializable;
 import java.util.List;
@@ -21,8 +21,6 @@ public class Page<T> implements Serializable{
 	public Page() {
 		this.pageNo = 1;
 		this.pageSize = 10;
-		this.totalCount = -1L;
-		this.list = null;
 	}
 	
 	public Page(int pageNo, int pageSize){
@@ -59,14 +57,6 @@ public class Page<T> implements Serializable{
 		this.totalCount = totalCount;
 	}
 
-	/** 总页数 ：总记录数/页大小*/
-	public long getTotalPages(){
-		long totalPages = this.totalCount / this.pageSize;
-		if(this.totalCount % this.pageSize > 0){
-			totalPages += 1;
-		}
-		return totalPages;
-	}
 	public List<T> getList() {
 		return list;
 	}

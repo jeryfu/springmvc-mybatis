@@ -9,7 +9,7 @@ import com.roachf.survey.pojo.entity.Demo;
 import com.roachf.survey.service.DemoService;
 
 @Service("demoService")
-public class DemoServiceImpl extends BaseServiceImpl<Demo, Long> implements DemoService{
+public class DemoServiceImpl extends BaseServiceImpl<Demo, Integer> implements DemoService{
 
 	private DemoDao demoDao;
 
