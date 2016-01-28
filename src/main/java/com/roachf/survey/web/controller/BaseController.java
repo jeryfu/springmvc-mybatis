@@ -1,5 +1,5 @@
 package com.roachf.survey.web.controller;
 
-public class BaseController {
-
+public abstract class BaseController {
+	
 }

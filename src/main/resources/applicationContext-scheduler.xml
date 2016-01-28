@@ -6,7 +6,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!-- spring task -->
-	<bean id="demoTask" class="com.roachf.survey.scheduler.DemoTask" />
+	<!-- <bean id="demoTask" class="com.roachf.survey.scheduler.DemoTask" /> -->
 	
 	<task:executor id="executor" pool-size="5"/>
 	<task:scheduler id="scheduler" pool-size="5"/>

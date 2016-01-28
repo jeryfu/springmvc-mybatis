@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.roachf.survey.pojo.entity.Demo;
-import com.roachf.survey.pojo.entity.Page;
 import com.roachf.survey.service.DemoService;
+import com.roachf.survey.utils.page.Page;
 
 @Controller
 @RequestMapping("demo")
@@ -38,9 +38,7 @@ public class DemoController {
 	 */
 	@RequestMapping(method=RequestMethod.GET)
 	public String list(Model model, Page<Demo> page){
-		logger.info("pageNo==" + page.getPageNo() + ", pageSize==" + page.getPageSize());
 		Page<Demo> pages = demoService.getListByPage(page, null);
-		logger.info("pages==" + pages.toString());
 		model.addAttribute("page", pages);
 		return "demo/demo";
 	}

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="page">
+
+	<sql id="page_column_list">
+		id, title, description, orderno, survey_id surveyId
+	</sql>
+	
+	<select id="list" resultType="page" parameterType="java.lang.Integer">
+		select
+		<include refid="page_column_list" />
+		from pages
+		where survey_id = #{id,jdbcType=INTEGER}
+		order by orderno
+	</select>
+
+	<select id="info" resultType="page" parameterType="java.lang.Integer">
+		select
+		<include refid="page_column_list" />
+		from pages
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	
+	<select id="prePage" parameterType="page" resultType="java.lang.Float">
+		select p.orderno from pages p where #{orderno} > p.orderno and p.survey_id = #{surveyId} limit 1
+	</select>
+	
+	<select id="nextPage" parameterType="page" resultType="java.lang.Float">
+		select p.orderno from pages p where p.orderno > #{orderno} and p.survey_id = #{surveyId} limit 1
+	</select>
+	
+	<select id="isFirst" parameterType="page" resultType="java.lang.Long">
+		select count(1) from pages p where p.survey_id = #{surveyId} and #{orderno} > p.orderno
+	</select>
+	
+	<select id="isLast" parameterType="page" resultType="java.lang.Long">
+		select count(1) from pages p where p.survey_id = #{surveyId} and p.orderno > #{orderno}
+	</select>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from pages where id = #{id}
+	</delete>
+	
+	<delete id="deleteBySurveyId" parameterType="java.lang.Integer">
+		delete from pages where survey_id = #{surveyId}
+	</delete>
+
+	<insert id="insert" parameterType="page" useGeneratedKeys="true" keyProperty="id">
+		insert into pages (title, description, orderno, survey_id)
+		values (#{title}, #{description}, (select max(pp.orderno) + 1 from pages pp where pp.survey_id = 1), #{surveyId})
+	</insert>
+
+	<update id="update" parameterType="page">
+		update pages
+		set title = #{title},
+		description = #{description}
+		where id = #{id}
+	</update>
+	
+	<update id="updateOrderno" parameterType="page">
+		update pages set orderno = #{orderno} where id = #{id}
+	</update>
+
+</mapper>

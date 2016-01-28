@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="answer">
+
+	<sql id="answer_column_list">
+		
+	</sql>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from answers where question_id = #{questionId}
+	</delete>
+	
+	<delete id="deleteByPageId" parameterType="java.lang.Integer">
+		delete from answers where question_id in (select q.id from questions q where q.page_id = #{pageId})
+	</delete>
+	
+	<delete id="deleteBySurveyId" parameterType="java.lang.Integer">
+		delete from answers where survey_id = #{surveyId}
+	</delete>
+</mapper>

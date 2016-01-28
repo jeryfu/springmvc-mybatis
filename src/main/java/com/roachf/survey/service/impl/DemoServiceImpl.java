@@ -1,7 +1,6 @@
 package com.roachf.survey.service.impl;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.roachf.survey.dao.DemoDao;
@@ -13,9 +12,9 @@ public class DemoServiceImpl extends BaseServiceImpl<Demo, Integer> implements D
 
 	private DemoDao demoDao;
 
-	@Resource(name="demoDao")
+	@Autowired
 	public void setDemoDao(DemoDao demoDao) {
-		super.setBaseDao(demoDao);
+//		super.setBaseDao(demoDao);
 		this.demoDao = demoDao;
 	} 
 	

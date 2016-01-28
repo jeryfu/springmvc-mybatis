@@ -1,1 +1,0 @@
-WARN  [main] [com.roachf.ssm.module.base.dao.impl.BaseDaoImpl] [line:116] [2015-11-16 17:09:32] - serialVersionUID没有设置get, set方法, 请查看是否必要. 

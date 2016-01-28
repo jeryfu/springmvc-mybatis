@@ -5,6 +5,11 @@
 	
 	<typeAliases>
 		<typeAlias type="com.roachf.survey.pojo.entity.Demo" alias="demo"/>
+		<typeAlias type="com.roachf.survey.pojo.entity.User" alias="user"/>
+		<typeAlias type="com.roachf.survey.pojo.entity.Survey" alias="survey"/>
+		<typeAlias type="com.roachf.survey.pojo.entity.Page" alias="page"/>
+		<typeAlias type="com.roachf.survey.pojo.entity.Question" alias="question"/>
+		<typeAlias type="com.roachf.survey.pojo.entity.Answer" alias="answer"/>
 	</typeAliases>
 	
 	<plugins>

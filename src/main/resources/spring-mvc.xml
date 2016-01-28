@@ -16,7 +16,17 @@
 		<property name="prefix" value="/WEB-INF/pages/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	
 	<mvc:annotation-driven></mvc:annotation-driven>
+	<mvc:interceptors>
+		<bean class="com.roachf.survey.web.interceptor.LoginInterceptor"></bean>
+	</mvc:interceptors>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8" />
+		<!-- 上传的文件的最大大小为5M -->
+		<property name="maxUploadSize" value="5242880" />
+	</bean>
 	
 	<mvc:default-servlet-handler/>
 	

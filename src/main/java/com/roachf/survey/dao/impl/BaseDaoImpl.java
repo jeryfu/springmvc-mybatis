@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.roachf.survey.dao.BaseDao;
-import com.roachf.survey.pojo.entity.Page;
+import com.roachf.survey.utils.page.Page;
 
 public class BaseDaoImpl<T, PK extends Serializable> implements BaseDao<T, PK> {
 
@@ -41,48 +41,71 @@ public class BaseDaoImpl<T, PK extends Serializable> implements BaseDao<T, PK> {
 	}
 
 	@Override
-	public Page<T> getListByPage(Page<T> page, Object parameters) {
-		List<T> list = getSqlSession().selectList(this.namespace + ".list", parameters,
+	public Page<T> getListByPage(Page<T> page, Object parameter) {
+		List<T> list = getSqlSession().selectList(this.namespace + ".list", parameter,
 				new RowBounds(page.getPageStart(), page.getPageSize()));
 		page.setList(list);
-		page.setTotalCount(count(parameters));
+		page.setTotalCount(count(parameter));
 		return page;
+	}
+	
+	@Override
+	public List<T> getList(Object parameter) {
+		return getList("list", parameter);
+	}
+	
+	@Override
+	public List<T> getList(String statement, Object parameter) {
+		return getSqlSession().selectList(this.namespace + "." + statement, parameter);
 	}
 	
 	@Override
 	public Long count(Object parameters) {
 		 return getSqlSession().selectOne(this.namespace + ".count", parameters);
 	}
-
-	public List<T> getList(Object parameter) {
-		return getSqlSession().selectList(this.namespace, parameter);
-	}
-
+	
 	@Override
-	public T getInfo(PK id) {
-		return getSqlSession().selectOne(this.namespace + ".info", id);
+	public T getInfo(Object parameter) {
+		return getSqlSession().selectOne(this.namespace + ".info", parameter);
+	}
+	
+	@Override
+	public Object getObject(String statement, Object parameter) {
+		return getSqlSession().selectOne(this.getNamespace() + "." + statement, parameter);
 	}
 
 	@Override
 	public boolean insert(T entity) {
-		return getSqlSession().insert(this.namespace + ".insert", entity) > 0;
+		int flag =  getSqlSession().insert(this.namespace + ".insert", entity);
+		logger.info("entity==" + entity);
+		return flag > 0;
 	}
 
 	@Override
 	public boolean update(T entity) {
-		return getSqlSession().update(this.namespace + ".update", entity) > 0;
+		return update("update", entity);
+	}
+	
+	@Override
+	public boolean update(String statement, Object parameter) {
+		return getSqlSession().update(this.namespace + "." + statement, parameter) > 0;
 	}
 
 	@Override
-	public boolean delete(PK id) {
-		return getSqlSession().delete(this.namespace + ".delete", id) > 0;
+	public boolean delete(Object parameter) {
+		return delete("delete", parameter);
+	}
+	
+	@Override
+	public boolean delete(String statement, Object parameter) {
+		return getSqlSession().delete(this.namespace + "." + statement, parameter) > 0;
 	}
 
 	/**
 	 * 获取sqlSession
 	 * @return
 	 */
-	private SqlSession getSqlSession() {
+	public SqlSession getSqlSession() {
 		return getSqlSessionFactory().openSession();
 	}
 

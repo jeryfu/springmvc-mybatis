@@ -6,8 +6,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.roachf.survey.pojo.entity.Demo;
-import com.roachf.survey.pojo.entity.Page;
 import com.roachf.survey.service.impl.DemoServiceImpl;
+import com.roachf.survey.utils.page.Page;
 
 public class DemoServiceTest {
 

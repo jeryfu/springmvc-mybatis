@@ -5,8 +5,8 @@ import java.io.Serializable;
 import org.apache.log4j.Logger;
 
 import com.roachf.survey.dao.BaseDao;
-import com.roachf.survey.pojo.entity.Page;
 import com.roachf.survey.service.BaseService;
+import com.roachf.survey.utils.page.Page;
 
 //@Service("baseService")  baseService baseDao 是不需要扫描注入的, 直接实例化它的子类. 否则会多实例化一次基类
 public class BaseServiceImpl<T, PK extends Serializable> implements BaseService<T, PK> {
@@ -33,6 +33,11 @@ public class BaseServiceImpl<T, PK extends Serializable> implements BaseService<
 	@Override
 	public T getInfo(PK id) {
 		return baseDao.getInfo(id);
+	}
+	
+	@Override
+	public T getInfo(Object parameter) {
+		return baseDao.getInfo(parameter);
 	}
 
 	@Override

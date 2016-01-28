@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+	
+	<sql id="user_fields">
+		id, email, password, nickname, register_time registerTime
+	</sql>
+
+	<select id="validateUser" resultType="user">
+		select <include refid="user_fields" /> from users u where u.email = #{email} and u.password = #{password}
+	</select>
+	
+	<select id="isReg" resultType="int">
+		select count(1) from users u where u.email = #{email}
+	</select>
+	
+	<insert id="insert" parameterType="user" useGeneratedKeys="true" keyProperty="id" >
+		insert into users(`email`, `password`, `nickname`, `register_date`) 
+			value (#{email}, #{password}, #{nickname}, #{registerDate})
+	</insert>
+	
+</mapper>

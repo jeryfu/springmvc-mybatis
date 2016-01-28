@@ -2,7 +2,7 @@ package com.roachf.survey.service;
 
 import java.io.Serializable;
 
-import com.roachf.survey.pojo.entity.Page;
+import com.roachf.survey.utils.page.Page;
 
 public interface BaseService<T, PK extends Serializable> {
 
@@ -11,6 +11,9 @@ public interface BaseService<T, PK extends Serializable> {
 
 	/** 获取详情 */
 	T getInfo(PK id);
+	
+	/** 获取详情 */
+	T getInfo(Object parameter);
 
 	/** 插入 */
 	boolean insert(T entity);

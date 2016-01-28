@@ -1,6 +1,0 @@
-WARN  [main] [com.roachf.ssm.module.base.dao.impl.BaseDaoImpl] [line:260] [2015-11-17 11:39:19] - 属性【serialVersionUID】没有设置get, set方法, 请查看是否必要. 
-WARN  [main] [com.roachf.ssm.module.base.dao.impl.BaseDaoImpl] [line:259] [2015-11-17 11:41:54] - 属性【serialVersionUID】没有设置get, set方法, 请查看是否必要. 
-WARN  [main] [com.roachf.ssm.module.base.dao.impl.BaseDaoImpl] [line:259] [2015-11-17 11:46:18] - 属性【serialVersionUID】没有设置get, set方法, 请查看是否必要. 
-WARN  [main] [com.roachf.ssm.module.base.dao.impl.BaseDaoImpl] [line:263] [2015-11-17 11:58:15] - 属性【serialVersionUID】没有设置get, set方法, 请查看是否必要. 
-WARN  [main] [com.roachf.ssm.module.base.dao.impl.BaseDaoImpl] [line:263] [2015-11-17 11:59:37] - 属性【serialVersionUID】没有设置get, set方法, 请查看是否必要. 
-WARN  [main] [com.roachf.ssm.module.base.dao.impl.BaseDaoImpl] [line:263] [2015-11-17 12:00:21] - 属性【serialVersionUID】没有设置get, set方法, 请查看是否必要. 

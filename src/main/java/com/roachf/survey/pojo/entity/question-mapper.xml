@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="question">
+
+	<sql id="question_column_list">
+		id, question_type questionType, title, options, other, other_style otherStyle,
+		other_select_options otherSelectOptions, matrix_row_titles matrixRowTitles,
+		matrix_col_titles matrixColTitles, matrix_select_options matrixSelectOptions, page_id pageId
+	</sql>
+	<select id="list" resultType="question" parameterType="java.lang.Integer">
+		select
+			<include refid="question_column_list" />
+		from questions
+		where page_id = #{id,jdbcType=INTEGER}
+	</select>
+	
+	<select id="info" resultType="question" parameterType="java.lang.Integer">
+		select
+			<include refid="question_column_list" />
+		from questions
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	
+	<!-- 新增问题 -->
+	<insert id="insert" parameterType="question" >
+	    insert into questions (question_type, title, 
+	      options, other, other_style, 
+	      other_select_options, matrix_row_titles, matrix_col_titles, 
+	      matrix_select_options, page_id)
+	    values (#{questionType}, #{title}, 
+	      #{options}, #{other}, #{otherStyle}, 
+	      #{otherSelectOptions}, #{matrixRowTitles}, #{matrixColTitles}, 
+	      #{matrixSelectOptions}, #{pageId})
+  	</insert>
+  	
+  	<update id="update" parameterType="question" >
+	    update questions
+	    set question_type = #{questionType,jdbcType=VARCHAR},
+	      title = #{title,jdbcType=VARCHAR},
+	      options = #{options,jdbcType=VARCHAR},
+	      other = #{other,jdbcType=BIT},
+	      other_style = #{otherStyle,jdbcType=INTEGER},
+	      other_select_options = #{otherSelectOptions,jdbcType=VARCHAR},
+	      matrix_row_titles = #{matrixRowTitles,jdbcType=VARCHAR},
+	      matrix_col_titles = #{matrixColTitles,jdbcType=VARCHAR},
+	      matrix_select_options = #{matrixSelectOptions,jdbcType=VARCHAR},
+	      page_id = #{pageId,jdbcType=INTEGER}
+	    where id = #{id,jdbcType=INTEGER}
+  	</update>
+	
+	<!-- 删除问题：根据问题id -->
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from questions where id = #{questionId}
+	</delete>
+	
+	<!-- 删除问题：根据页面id -->
+	<delete id="deleteByPageId" parameterType="java.lang.Integer">
+		delete from questions where page_id = #{pageId}
+	</delete>
+	
+	<!-- 删除问题：根据调查id -->
+	<delete id="deleteBySurveyId" parameterType="java.lang.Integer">
+		delete from questions where page_id in (
+			select p.id from pages p where p.survey_id = #{surveyId}
+		)
+	</delete>
+
+</mapper>
